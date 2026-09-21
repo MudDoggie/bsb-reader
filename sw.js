@@ -1,5 +1,5 @@
 // Offline cache for BSB Reader. Bump VERSION whenever any file changes.
-const VERSION = 'bsb-reader-v1';
+const VERSION = 'bsb-reader-v2';
 const FILES = [
   './', 'index.html', 'manifest.webmanifest',
   'icon-192.png', 'icon-512.png', 'icon-maskable-512.png',

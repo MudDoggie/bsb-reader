@@ -186,6 +186,25 @@
   .loading { text-align: center; padding: 80px 20px; color: var(--text-secondary); }
   .theme-toggle { font-size: 1rem; }
 
+  /* Phones: name + light/dark button on one row, breadcrumb on its own scrollable row */
+  header.topbar { padding-top: calc(10px + env(safe-area-inset-top, 0px)); }
+  @media (max-width: 640px) {
+    header.topbar {
+      display: grid; grid-template-columns: 1fr auto; align-items: center;
+      column-gap: 10px; row-gap: 4px; padding-bottom: 6px;
+    }
+    header.topbar .brand { grid-column: 1; grid-row: 1; }
+    header.topbar .spacer { display: none; }
+    header.topbar .theme-toggle { grid-column: 2; grid-row: 1; }
+    header.topbar .crumb {
+      grid-column: 1 / -1; grid-row: 2;
+      flex-wrap: nowrap; white-space: nowrap; overflow-x: auto;
+      scrollbar-width: none; -webkit-overflow-scrolling: touch;
+    }
+    header.topbar .crumb::-webkit-scrollbar { display: none; }
+    header.topbar .crumb button { padding: 8px 4px; }
+  }
+
   footer.note {
     text-align: center; color: var(--text-muted); font-size: 0.78rem; padding: 20px 16px 40px;
   }
@@ -268,6 +287,7 @@
       parts.push('&rsaquo; <span>' + (state.chapterIdx+1) + '</span>');
     }
     c.innerHTML = parts.join(' ');
+    c.scrollLeft = c.scrollWidth;
     Array.prototype.forEach.call(c.querySelectorAll('button'), function(btn){
       btn.addEventListener('click', function(){
         var nav = btn.getAttribute('data-nav');
